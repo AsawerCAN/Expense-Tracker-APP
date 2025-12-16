@@ -3,7 +3,9 @@ from pathlib import Path
 import pytest
 from datetime import date
 
-from main import Expense, ExpenseStore, parse_date
+from expense_tracker.models import Expense
+from expense_tracker.store import ExpenseStore
+from expense_tracker.utils import parse_date
 
 
 def test_parse_date_valid():
@@ -27,7 +29,7 @@ def test_add_and_total(tmp_path: Path):
 
     assert store.total_spending() == pytest.approx(13.5)
     assert store.total_spending(category="food") == pytest.approx(10.5)
-    assert store.total_spending(category="FOOD") == pytest.approx(10.5)  # case-insensitive
+    assert store.total_spending(category="FOOD") == pytest.approx(10.5)
 
 
 def test_persistence(tmp_path: Path):
